@@ -71,7 +71,13 @@ class IntelligentOffice:
             self.change_servo_angle(0)
             self.blinds_open = False
 
-    
+    def manage_light_level(self) -> None:
+        if VEML7700.lux < 500:
+            GPIO.output(self.LED_PIN, True)
+            self.light_on = True
+        elif VEML7700.lux > 550:
+            GPIO.output(self.LED_PIN, False)
+            self.light_on = False
 
 
     def monitor_air_quality(self) -> None:
