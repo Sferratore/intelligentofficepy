@@ -1,6 +1,8 @@
 import time
 from datetime import datetime
 
+from mock.adafruit_veml7700 import VEML7700
+
 DEPLOYMENT = False  # This variable is to understand whether you are deploying on the actual hardware
 
 try:
@@ -69,9 +71,7 @@ class IntelligentOffice:
             self.change_servo_angle(0)
             self.blinds_open = False
 
-    def manage_light_level(self) -> None:
-        # To be implemented
-        pass
+    
 
 
     def monitor_air_quality(self) -> None:
