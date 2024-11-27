@@ -26,7 +26,7 @@ class TestIntelligentOffice(unittest.TestCase):
         self.assertRaises(IntelligentOfficeError, system.check_quadrant_occupancy, 100)
 
     @patch.object(IntelligentOffice, "change_servo_angle")
-    @patch.object(SDL_DS3231, "read_datetime", new_callable=PropertyMock)
+    @patch.object(SDL_DS3231, "read_datetime")
     def test_manage_blinds_based_on_time_when_time_between_8_and_20_in_weekday(self, mock_datetime: Mock, mock_output: Mock):
         mock_datetime.return_value = datetime(2024, 11, 11, 8, 0)
         system = IntelligentOffice()
@@ -35,7 +35,7 @@ class TestIntelligentOffice(unittest.TestCase):
         self.assertTrue(system.blinds_open)
 
     @patch.object(IntelligentOffice, "change_servo_angle")
-    @patch.object(SDL_DS3231, "read_datetime", new_callable=PropertyMock)
+    @patch.object(SDL_DS3231, "read_datetime")
     def test_manage_blinds_based_on_time_when_time_not_between_8_and_20_in_weekday(self, mock_datetime: Mock, mock_output: Mock):
         mock_datetime.return_value = datetime(2024, 11, 11, 7, 59)
         system = IntelligentOffice()
@@ -44,7 +44,7 @@ class TestIntelligentOffice(unittest.TestCase):
         self.assertTrue(not system.blinds_open)
 
     @patch.object(IntelligentOffice, "change_servo_angle")
-    @patch.object(SDL_DS3231, "read_datetime", new_callable=PropertyMock)
+    @patch.object(SDL_DS3231, "read_datetime")
     def test_manage_blinds_based_on_time_when_time_between_8_and_20_in_weekends(self, mock_datetime: Mock, mock_output: Mock):
         mock_datetime.return_value = datetime(2024, 11, 10, 11, 59)
         system = IntelligentOffice()
@@ -53,7 +53,7 @@ class TestIntelligentOffice(unittest.TestCase):
         self.assertTrue(not system.blinds_open)
 
     @patch.object(IntelligentOffice, "change_servo_angle")
-    @patch.object(SDL_DS3231, "read_datetime", new_callable=PropertyMock)
+    @patch.object(SDL_DS3231, "read_datetime")
     def test_manage_blinds_based_on_time_when_time_not_between_8_and_20_in_weekends(self, mock_datetime: Mock, mock_output: Mock):
         mock_datetime.return_value = datetime(2024, 11, 10, 1, 59)
         system = IntelligentOffice()

@@ -1,4 +1,5 @@
 import time
+from datetime import datetime
 
 DEPLOYMENT = False  # This variable is to understand whether you are deploying on the actual hardware
 
@@ -60,8 +61,13 @@ class IntelligentOffice:
             raise IntelligentOfficeError
 
     def manage_blinds_based_on_time(self) -> None:
-        # To be implemented
-        pass
+        daytime = self.rtc.read_datetime()
+        if daytime.weekday() not in [5, 6] and 8 <= daytime.hour <= 20:
+            self.change_servo_angle(12)
+            self.blinds_open = True
+        else:
+            self.change_servo_angle(0)
+            self.blinds_open = False
 
     def manage_light_level(self) -> None:
         # To be implemented
