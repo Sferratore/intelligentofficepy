@@ -72,6 +72,10 @@ class IntelligentOffice:
             self.blinds_open = False
 
     def manage_light_level(self) -> None:
+        if not self.check_quadrant_occupancy(self.INFRARED_PIN1) and not self.check_quadrant_occupancy(self.INFRARED_PIN2) and not self.check_quadrant_occupancy(self.INFRARED_PIN3) and not self.check_quadrant_occupancy(self.INFRARED_PIN4):
+            GPIO.output(self.LED_PIN, False)
+            self.light_on = False
+            return
         if VEML7700.lux < 500:
             GPIO.output(self.LED_PIN, True)
             self.light_on = True
